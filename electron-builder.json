@@ -1,0 +1,97 @@
+{
+  "appId": "ai.tokenring.coder",
+  "productName": "TokenRing Coder",
+  "organization": "TokenRing AI",
+  "directories": {
+    "output": "dist-electron",
+    "buildResources": "electron/resources",
+    "app": "dist-electron/TokenRing Coder"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "extraResources": [
+    {
+      "from": "dist/",
+      "to": "resources/backend",
+      "filter": ["**/*"]
+    }
+  ],
+  "asar": {
+    "ordering": "file-order",
+    "smartUnpack": true
+  },
+  "mac": {
+    "icon": "electron/resources/icon.icns",
+    "category": "public.app-category.developer-tools",
+    "entitlements": "electron/resources/entitlements.plist",
+    "entitlementsInherit": "electron/resources/entitlements.plist",
+    "signatureIdentity": "Developer ID Application: TokenRing AI",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "type": "distribution",
+    "target": ["dmg", "zip"]
+  },
+  "dmg": {
+    "title": "TokenRing Coder",
+    "background": "electron/resources/background.png",
+    "contents": [
+      {
+        "x": 130,
+        "y": 220,
+        "type": "file",
+        "path": "TokenRing Coder.app"
+      },
+      {
+        "x": 410,
+        "y": 220,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ],
+    "window": {
+      "x": 100,
+      "y": 100,
+      "width": 500,
+      "height": 400
+    }
+  },
+  "win": {
+    "icon": "electron/resources/icon.ico",
+    "target": ["nsis", "zip"],
+    "publisherName": "TokenRing AI",
+    "requested-execution-level": "asInvoker",
+    "applicationCategory": "DeveloperApplication"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "shortcutName": "TokenRing Coder",
+    "license": "electron/resources/LICENSE"
+  },
+  "linux": {
+    "icon": "electron/resources/icon.png",
+    "category": "Development;IDE",
+    "target": ["AppImage", "deb", "rpm", "snap"],
+    "desktop": {
+      "Name": "TokenRing Coder",
+      "Type": "Application",
+      "Comment": "AI-powered coding assistant",
+      "Categories": "Development;IDE",
+      "Terminal": false
+    }
+  },
+  "pkg": {
+    "id": "ai.tokenring.coder",
+    "background": "electron/resources/background.png",
+    "backgroundColor": "#1e1e1e",
+    "installLocation": "/Applications"
+  },
+  "publish": {
+    "provider": "github",
+    "owner": "tokenring-ai",
+    "repo": "monorepo",
+    "releaseType": "draft"
+  }
+}

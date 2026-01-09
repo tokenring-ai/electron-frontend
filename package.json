@@ -1,0 +1,42 @@
+{
+  "name": "@tokenring-ai/electron-frontend",
+  "description": "TokenRing Electron Frontend",
+  "version": "0.2.7",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3",
+    "concurrently": "^8.2.2",
+    "vitest": "catalog:",
+    "typescript": "catalog:"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tokenring-ai/monorepo",
+    "directory": "frontend/electron"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "electron:dev": "concurrently \"npm run electron:dev:backend\" \"npm run electron:dev:frontend\"",
+    "electron:dev:backend": "bun run build --watch",
+    "electron:dev:frontend": "cd ../frontend/chat && bun run dev",
+    "electron:build": "npm run build:frontend && npm run build:backend && npm run electron:package",
+    "electron:build:all": "npm run build && npm run build:frontend && npm run electron:package",
+    "build:frontend": "cd ../frontend/chat && bun run build",
+    "build:backend": "bun run build",
+    "electron:package": "cd electron && electron-builder",
+    "electron:preview": "electron ./dist-electron/win-unpacked/tokenring-coder.exe",
+    "electron:package:mac": "cd electron && electron-builder --mac",
+    "electron:package:win": "cd electron && electron-builder --win",
+    "electron:package:linux": "cd electron && electron-builder --linux",
+    "electron:rebuild": "electron-rebuild -f -w better-sqlite3",
+    "build": "tsc --noEmit"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./*": "./*.ts"
+  }
+}
