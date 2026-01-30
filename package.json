@@ -3,8 +3,8 @@
   "description": "TokenRing Electron Frontend",
   "version": "0.2.7",
   "devDependencies": {
-    "electron": "^39.2.7",
-    "electron-builder": "^26.4.0",
+    "electron": "^40.1.0",
+    "electron-builder": "^26.6.0",
     "concurrently": "^9.2.1",
     "vitest": "catalog:",
     "typescript": "catalog:"
