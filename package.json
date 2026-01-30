@@ -6,8 +6,8 @@
     "electron": "^40.1.0",
     "electron-builder": "^26.6.0",
     "concurrently": "^9.2.1",
-    "vitest": "catalog:",
-    "typescript": "catalog:"
+    "vitest": "^4.0.18",
+    "typescript": "^5.9.3"
   },
   "repository": {
     "type": "git",
