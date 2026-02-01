@@ -2,6 +2,11 @@
   "name": "@tokenring-ai/electron-frontend",
   "description": "TokenRing Electron Frontend",
   "version": "0.2.7",
+  "dependencies": {
+    "@tokenring-ai/app": "0.2.0",
+    "@tokenring-ai/web-host": "0.2.0",
+    "zod": "^4.3.6"
+  },
   "devDependencies": {
     "electron": "^40.1.0",
     "electron-builder": "^26.6.0",
