@@ -8,8 +8,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "electron": "^40.1.0",
-    "electron-builder": "^26.6.0",
+    "electron": "^40.4.1",
+    "electron-builder": "^26.8.1",
     "concurrently": "^9.2.1",
     "vitest": "^4.0.18",
     "typescript": "^5.9.3"
