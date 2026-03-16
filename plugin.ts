@@ -9,7 +9,7 @@ const configSchema = z.object({
     port: z.number().default(3456),
     host: z.string().default('127.0.0.1'),
     dataDirectory: z.string().default('~/.tokenring'),
-    workingDirectory: z.string().default('~'),
+    projectDirectory: z.string().default('~'),
   }).optional(),
 });
 
