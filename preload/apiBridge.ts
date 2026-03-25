@@ -113,8 +113,8 @@ contextBridge.exposeInMainWorld('tokenringApp', {
     ipcRenderer.on('menu:about', () => callback('about'));
 
     return () => {
-      ipcRenderer.off('menu:new-chat');
-      ipcRenderer.off('menu:about');
+    ipcRenderer.off('menu:new-chat', () => {});
+    ipcRenderer.off('menu:about', () => {});
     };
   },
 

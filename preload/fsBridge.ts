@@ -27,7 +27,7 @@ const ReadDirectorySchema = z.object({
 function validateInput<T>(schema: z.ZodSchema<T>, data: unknown): data is T {
   const result = schema.safeParse(data);
   if (!result.success) {
-    console.error('Invalid input:', result.error.errors);
+    console.error('Invalid input:', result.error.issues);
     return false;
   }
   return true;
