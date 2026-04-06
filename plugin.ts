@@ -15,6 +15,7 @@ const configSchema = z.object({
 
 export default {
   name: packageJSON.name,
+  displayName: "Electron Integration",
   version: packageJSON.version,
   description: 'TokenRing Coder Electron Integration',
   install(app, config) {
