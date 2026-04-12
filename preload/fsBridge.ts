@@ -1,5 +1,6 @@
-import { contextBridge, ipcRenderer } from 'electron';
-import { z } from 'zod';
+import type {MaybePromise} from "bun";
+import {contextBridge, ipcRenderer} from 'electron';
+import {z} from 'zod';
 
 // File system operation schemas for validation
 const ReadFileSchema = z.object({
@@ -35,35 +36,39 @@ function validateInput<T>(schema: z.ZodSchema<T>, data: unknown): data is T {
 
 // Expose filesystem API to renderer process
 contextBridge.exposeInMainWorld('tokenringFS', {
-  readFile: async (data: unknown): Promise<{ success: boolean; content?: string; error?: string }> => {
+  readFile: (data: unknown): MaybePromise<{ success: boolean; content?: string; error?: string }> => {
     if (!validateInput(ReadFileSchema, data)) {
       return { success: false, error: 'Invalid input' };
     }
     return ipcRenderer.invoke('fs:readFile', data.path);
   },
 
-  writeFile: async (data: unknown): Promise<{ success: boolean; error?: string }> => {
+  writeFile: (data: unknown): MaybePromise<{ success: boolean; error?: string }> => {
     if (!validateInput(WriteFileSchema, data)) {
       return { success: false, error: 'Invalid input' };
     }
     return ipcRenderer.invoke('fs:writeFile', data.path, data.content);
   },
 
-  exists: async (data: unknown): Promise<{ success: boolean; exists?: boolean }> => {
+  exists: (data: unknown): MaybePromise<{ success: boolean; exists?: boolean }> => {
     if (!validateInput(ExistsSchema, data)) {
       return { success: false };
     }
     return ipcRenderer.invoke('fs:exists', data.path);
   },
 
-  stat: async (data: unknown): Promise<{ success: boolean; stats?: object; error?: string }> => {
+  stat: (data: unknown): MaybePromise<{ success: boolean; stats?: object; error?: string }> => {
     if (!validateInput(StatSchema, data)) {
       return { success: false, error: 'Invalid input' };
     }
     return ipcRenderer.invoke('fs:stat', data.path);
   },
 
-  readDirectory: async (data: unknown): Promise<{ success: boolean; files?: Array<{ name: string; isDirectory: boolean; isFile: boolean }>; error?: string }> => {
+  readDirectory: (data: unknown): MaybePromise<{
+    success: boolean;
+    files?: Array<{ name: string; isDirectory: boolean; isFile: boolean }>;
+    error?: string
+  }> => {
     if (!validateInput(ReadDirectorySchema, data)) {
       return { success: false, error: 'Invalid input' };
     }

@@ -1,4 +1,4 @@
-import { TokenRingPlugin } from '@tokenring-ai/app';
+import type { TokenRingPlugin } from '@tokenring-ai/app';
 import { WebHostService } from '@tokenring-ai/web-host';
 import { z } from 'zod';
 import packageJSON from './package.json' with { type: 'json' };

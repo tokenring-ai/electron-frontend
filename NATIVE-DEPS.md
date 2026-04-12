@@ -50,11 +50,13 @@ npx electron-rebuild -f -w better-sqlite3
 ### Build Fails on macOS
 
 1. Install Xcode Command Line Tools:
+
    ```bash
    xcode-select --install
    ```
 
 2. Set the correct SDK:
+
    ```bash
    export SDKROOT=$(xcrun --show-sdk-path --sdk macosx)
    ```
@@ -63,6 +65,7 @@ npx electron-rebuild -f -w better-sqlite3
 
 1. Install Visual Studio Build Tools
 2. Run in Developer Command Prompt:
+
    ```cmd
    npm run electron:rebuild
    ```
@@ -70,12 +73,14 @@ npx electron-rebuild -f -w better-sqlite3
 ### Build Fails on Linux
 
 1. Install build dependencies:
+
    ```bash
    # Ubuntu/Debian
    sudo apt-get install -y build-essential python3 libgtk-3-0 libnss3 libnotify4 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxdamage1 libxext6 libxfixes3 libxrandr2 libxrender1 libxtst6 libappindicator1 libasound2t
    ```
 
 2. Rebuild:
+
    ```bash
    npm run electron:rebuild
    ```
@@ -109,6 +114,7 @@ To speed up rebuilds:
 1. Use `--cache-path` to specify a cache directory
 2. Avoid rebuilding modules that haven't changed
 3. Use parallel builds with `-p` flag:
+
    ```bash
    npx electron-rebuild -p -f -w better-sqlite3
    ```
@@ -123,6 +129,7 @@ npm run electron:rebuild
 ```
 
 For GitHub Actions, add before the build:
+
 ```yaml
 - name: Install dependencies
   run: npm ci

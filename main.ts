@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray, dialog } from 'electron';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { spawn, ChildProcess } from 'child_process';
-import fs from 'fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawn, type ChildProcess } from 'node:child_process';
+import fs from 'node:fs/promises';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -32,7 +32,7 @@ class TokenRingCoderApp {
   private tray: Tray | null = null;
   private isDevelopment = process.env.NODE_ENV === 'development';
 
-  async start() {
+  start() {
     // Single instance lock
     const gotTheLock = app.requestSingleInstanceLock();
     if (!gotTheLock) {
@@ -254,13 +254,13 @@ class TokenRingCoderApp {
     });
 
     // Dialog operations
-    ipcMain.handle('dialog:openFile', async (event, options = {}) => {
+    ipcMain.handle('dialog:openFile', async (_event, options = {}) => {
       if (!this.mainWindow) throw new Error('No main window');
       const result = await dialog.showOpenDialog(this.mainWindow, options);
       return result;
     });
 
-    ipcMain.handle('dialog:openDirectory', async (event, options = {}) => {
+    ipcMain.handle('dialog:openDirectory', async (_event, options = {}) => {
       if (!this.mainWindow) throw new Error('No main window');
       const result = await dialog.showOpenDialog(this.mainWindow, {
         ...options,
@@ -269,7 +269,7 @@ class TokenRingCoderApp {
       return result;
     });
 
-    ipcMain.handle('dialog:saveFile', async (event, options = {}) => {
+    ipcMain.handle('dialog:saveFile', async (_event, options = {}) => {
       if (!this.mainWindow) throw new Error('No main window');
       const result = await dialog.showSaveDialog(this.mainWindow, options);
       return result;
@@ -475,4 +475,4 @@ class TokenRingCoderApp {
 
 // Start the app
 const tokenRingApp = new TokenRingCoderApp();
-tokenRingApp.start().catch(console.error);
+tokenRingApp.start();

@@ -31,6 +31,7 @@ electron/
 ### Main Process (`main.ts`)
 
 The main process handles:
+
 - Application lifecycle (startup, shutdown)
 - Window management (create, resize, close)
 - IPC handlers (filesystem, dialogs, app info)
@@ -39,6 +40,7 @@ The main process handles:
 ### Renderer Process
 
 The renderer process loads the React chat UI served by the backend:
+
 - Runs in a sandboxed environment
 - Communicates with main process via preload scripts
 - Uses context bridge for secure IPC
@@ -46,6 +48,7 @@ The renderer process loads the React chat UI served by the backend:
 ### Preload Scripts
 
 Preload scripts expose secure APIs to the renderer:
+
 - `tokenringFS`: Filesystem operations (readFile, writeFile, etc.)
 - `tokenringApp`: App utilities (version, platform, dialogs, window controls)
 - `tokenringUtil`: Utility functions (debounce, throttle, etc.)
@@ -55,12 +58,14 @@ Preload scripts expose secure APIs to the renderer:
 ### Prerequisites
 
 1. Install dependencies:
+
    ```bash
    cd app/coder
    bun install
    ```
 
 2. Install Electron dependencies:
+
    ```bash
    npm run electron:rebuild
    ```
@@ -68,12 +73,14 @@ Preload scripts expose secure APIs to the renderer:
 ### Development Mode
 
 Run both frontend and backend in development mode:
+
 ```bash
 cd app/coder
 npm run electron:dev
 ```
 
 This will:
+
 1. Build the backend with watch mode
 2. Start the frontend dev server on port 5173
 3. Run the Electron app (connects to localhost:5173)
@@ -81,12 +88,14 @@ This will:
 ### Building for Production
 
 Build the Electron app for the current platform:
+
 ```bash
 cd app/coder
 npm run electron:build
 ```
 
 This will:
+
 1. Build the frontend React app
 2. Build the backend CLI
 3. Package everything with electron-builder
@@ -153,6 +162,7 @@ npm run electron:rebuild
 ### Backend Not Starting
 
 Check the console output for errors:
+
 1. Verify `dist/tr-coder.js` exists
 2. Check Node.js is in PATH
 3. Verify all dependencies are installed

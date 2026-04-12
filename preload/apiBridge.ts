@@ -2,33 +2,33 @@ import { contextBridge, ipcRenderer } from 'electron';
 import { z } from 'zod';
 
 // App info schemas
-const GetVersionSchema = z.object({});
+const _GetVersionSchema = z.object({});
 
-const GetPlatformSchema = z.object({});
+const _GetPlatformSchema = z.object({});
 
-const GetArchSchema = z.object({});
+const _GetArchSchema = z.object({});
 
-const WindowMinimizeSchema = z.object({});
+const _WindowMinimizeSchema = z.object({});
 
-const WindowMaximizeSchema = z.object({});
+const _WindowMaximizeSchema = z.object({});
 
-const WindowCloseSchema = z.object({});
+const _WindowCloseSchema = z.object({});
 
-const BackendErrorSchema = z.object({
+const _BackendErrorSchema = z.object({
   error: z.string()
 });
 
 // Expose app API to renderer process
 contextBridge.exposeInMainWorld('tokenringApp', {
-  getVersion: async (): Promise<string> => {
+  getVersion: (): Promise<string> => {
     return ipcRenderer.invoke('app:getVersion');
   },
 
-  getPlatform: async (): Promise<string> => {
+  getPlatform: (): Promise<string> => {
     return ipcRenderer.invoke('app:getPlatform');
   },
 
-  getArch: async (): Promise<string> => {
+  getArch: (): Promise<string> => {
     return ipcRenderer.invoke('app:getArch');
   },
 
@@ -77,19 +77,19 @@ contextBridge.exposeInMainWorld('tokenringApp', {
 
   // Dialogs
   dialog: {
-    openFile: async (options?: Electron.OpenDialogOptions): Promise<Electron.OpenDialogReturnValue> => {
+    openFile: (options?: Electron.OpenDialogOptions): Promise<Electron.OpenDialogReturnValue> => {
       return ipcRenderer.invoke('dialog:openFile', options);
     },
 
-    openDirectory: async (options?: Electron.OpenDialogOptions): Promise<Electron.OpenDialogReturnValue> => {
+    openDirectory: (options?: Electron.OpenDialogOptions): Promise<Electron.OpenDialogReturnValue> => {
       return ipcRenderer.invoke('dialog:openDirectory', options);
     },
 
-    saveFile: async (options?: Electron.SaveDialogOptions): Promise<Electron.SaveDialogReturnValue> => {
+    saveFile: (options?: Electron.SaveDialogOptions): Promise<Electron.SaveDialogReturnValue> => {
       return ipcRenderer.invoke('dialog:saveFile', options);
     },
 
-    showMessageBox: async (options: Electron.MessageBoxOptions): Promise<Electron.MessageBoxReturnValue> => {
+    showMessageBox: (options: Electron.MessageBoxOptions): Promise<Electron.MessageBoxReturnValue> => {
       return ipcRenderer.invoke('dialog:showMessageBox', options);
     }
   },
@@ -129,18 +129,18 @@ contextBridge.exposeInMainWorld('tokenringApp', {
       ipcRenderer.send('clipboard:writeText', text);
     },
 
-    readText: async (): Promise<string> => {
+    readText: (): Promise<string> => {
       return ipcRenderer.invoke('clipboard:readText');
     }
   },
 
   // Shell integration
   shell: {
-    openExternal: async (url: string): Promise<boolean> => {
+    openExternal: (url: string): Promise<boolean> => {
       return ipcRenderer.invoke('shell:openExternal', url);
     },
 
-    openPath: async (path: string): Promise<string> => {
+    openPath: (path: string): Promise<string> => {
       return ipcRenderer.invoke('shell:openPath', path);
     }
   }
