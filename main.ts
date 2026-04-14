@@ -49,7 +49,7 @@ class TokenRingCoderApp {
     });
 
     // Initialize when ready
-    app.whenReady().then(() => {
+    void app.whenReady().then(() => {
       this.createWindow();
       this.setupIpcHandlers();
       this.createTray();
@@ -58,7 +58,7 @@ class TokenRingCoderApp {
     // Handle window-all-closed
     app.on('window-all-closed', () => {
       if (process.platform !== 'darwin') {
-        this.shutdown();
+        void this.shutdown();
       }
     });
 
@@ -110,10 +110,10 @@ class TokenRingCoderApp {
     this.createMenu();
 
     // Load the frontend
-    this.loadFrontend();
+    void this.loadFrontend();
 
     // Start backend
-    this.startBackend();
+    void this.startBackend();
 
     // Handle window closed
     this.mainWindow.on('closed', () => {
@@ -181,9 +181,9 @@ class TokenRingCoderApp {
       });
 
       console.log(`[Backend] Started with PID ${this.backendProcess.pid}`);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('[Backend] Failed to start:', error);
-      this.showBackendError(`Failed to start backend: ${error}`);
+      this.showBackendError(`Failed to start backend: ${error as string}`);
     }
   }
 
@@ -199,7 +199,7 @@ class TokenRingCoderApp {
       try {
         const content = await fs.readFile(filePath, 'utf-8');
         return { success: true, content };
-      } catch (error) {
+      } catch (error: unknown) {
         return { success: false, error: (error as Error).message };
       }
     });
@@ -208,7 +208,7 @@ class TokenRingCoderApp {
       try {
         await fs.writeFile(filePath, content, 'utf-8');
         return { success: true };
-      } catch (error) {
+      } catch (error: unknown) {
         return { success: false, error: (error as Error).message };
       }
     });
@@ -234,7 +234,7 @@ class TokenRingCoderApp {
             mtime: stats.mtime,
           }
         };
-      } catch (error) {
+      } catch (error: unknown) {
         return { success: false, error: (error as Error).message };
       }
     });
@@ -248,7 +248,7 @@ class TokenRingCoderApp {
           isFile: entry.isFile()
         }));
         return { success: true, files };
-      } catch (error) {
+      } catch (error: unknown) {
         return { success: false, error: (error as Error).message };
       }
     });
