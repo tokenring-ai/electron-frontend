@@ -1,5 +1,5 @@
-import { contextBridge, ipcRenderer } from 'electron';
-import { z } from 'zod';
+import { contextBridge, ipcRenderer } from "electron";
+import { z } from "zod";
 
 // App info schemas
 const _GetVersionSchema = z.object({});
@@ -15,25 +15,25 @@ const _WindowMaximizeSchema = z.object({});
 const _WindowCloseSchema = z.object({});
 
 const _BackendErrorSchema = z.object({
-  error: z.string()
+  error: z.string(),
 });
 
 // Expose app API to renderer process
-contextBridge.exposeInMainWorld('tokenringApp', {
+contextBridge.exposeInMainWorld("tokenringApp", {
   getVersion: (): Promise<string> => {
-    return ipcRenderer.invoke('app:getVersion');
+    return ipcRenderer.invoke("app:getVersion");
   },
 
   getPlatform: (): Promise<string> => {
-    return ipcRenderer.invoke('app:getPlatform');
+    return ipcRenderer.invoke("app:getPlatform");
   },
 
   getArch: (): Promise<string> => {
-    return ipcRenderer.invoke('app:getArch');
+    return ipcRenderer.invoke("app:getArch");
   },
 
   isDevelopment: (): boolean => {
-    return process.env.NODE_ENV === 'development';
+    return process.env.NODE_ENV === "development";
   },
 
   getElectronVersion: (): string => {
@@ -51,15 +51,15 @@ contextBridge.exposeInMainWorld('tokenringApp', {
   // Window controls
   window: {
     minimize: async (): Promise<boolean> => {
-      return (await ipcRenderer.invoke('window:minimize')).success;
+      return (await ipcRenderer.invoke("window:minimize")).success;
     },
 
     maximize: async (): Promise<boolean> => {
-      return (await ipcRenderer.invoke('window:maximize')).success;
+      return (await ipcRenderer.invoke("window:maximize")).success;
     },
 
     close: async (): Promise<boolean> => {
-      return (await ipcRenderer.invoke('window:close')).success;
+      return (await ipcRenderer.invoke("window:close")).success;
     },
 
     isMaximized: (): boolean => {
@@ -72,26 +72,26 @@ contextBridge.exposeInMainWorld('tokenringApp', {
 
     isFocused: (): boolean => {
       return true;
-    }
+    },
   },
 
   // Dialogs
   dialog: {
     openFile: (options?: Electron.OpenDialogOptions): Promise<Electron.OpenDialogReturnValue> => {
-      return ipcRenderer.invoke('dialog:openFile', options);
+      return ipcRenderer.invoke("dialog:openFile", options);
     },
 
     openDirectory: (options?: Electron.OpenDialogOptions): Promise<Electron.OpenDialogReturnValue> => {
-      return ipcRenderer.invoke('dialog:openDirectory', options);
+      return ipcRenderer.invoke("dialog:openDirectory", options);
     },
 
     saveFile: (options?: Electron.SaveDialogOptions): Promise<Electron.SaveDialogReturnValue> => {
-      return ipcRenderer.invoke('dialog:saveFile', options);
+      return ipcRenderer.invoke("dialog:saveFile", options);
     },
 
     showMessageBox: (options: Electron.MessageBoxOptions): Promise<Electron.MessageBoxReturnValue> => {
-      return ipcRenderer.invoke('dialog:showMessageBox', options);
-    }
+      return ipcRenderer.invoke("dialog:showMessageBox", options);
+    },
   },
 
   // Listen for backend errors
@@ -99,22 +99,22 @@ contextBridge.exposeInMainWorld('tokenringApp', {
     const listener = (_event: Electron.IpcRendererEvent, data: { error: string }) => {
       callback(data.error);
     };
-    ipcRenderer.on('backend:error', listener);
+    ipcRenderer.on("backend:error", listener);
 
     // Return unsubscribe function
     return () => {
-      ipcRenderer.off('backend:error', listener);
+      ipcRenderer.off("backend:error", listener);
     };
   },
 
   // Listen for menu events
   onMenuEvent: (callback: (event: string) => void) => {
-    ipcRenderer.on('menu:new-chat', () => callback('new-chat'));
-    ipcRenderer.on('menu:about', () => callback('about'));
+    ipcRenderer.on("menu:new-chat", () => callback("new-chat"));
+    ipcRenderer.on("menu:about", () => callback("about"));
 
     return () => {
-    ipcRenderer.off('menu:new-chat', () => {});
-    ipcRenderer.off('menu:about', () => {});
+      ipcRenderer.off("menu:new-chat", () => {});
+      ipcRenderer.off("menu:about", () => {});
     };
   },
 
@@ -126,33 +126,30 @@ contextBridge.exposeInMainWorld('tokenringApp', {
   // Clipboard
   clipboard: {
     writeText: (text: string): void => {
-      ipcRenderer.send('clipboard:writeText', text);
+      ipcRenderer.send("clipboard:writeText", text);
     },
 
     readText: (): Promise<string> => {
-      return ipcRenderer.invoke('clipboard:readText');
-    }
+      return ipcRenderer.invoke("clipboard:readText");
+    },
   },
 
   // Shell integration
   shell: {
     openExternal: (url: string): Promise<boolean> => {
-      return ipcRenderer.invoke('shell:openExternal', url);
+      return ipcRenderer.invoke("shell:openExternal", url);
     },
 
     openPath: (path: string): Promise<string> => {
-      return ipcRenderer.invoke('shell:openPath', path);
-    }
-  }
+      return ipcRenderer.invoke("shell:openPath", path);
+    },
+  },
 });
 
 // Expose utility functions
-contextBridge.exposeInMainWorld('tokenringUtil', {
+contextBridge.exposeInMainWorld("tokenringUtil", {
   // Debounce function
-  debounce: <T extends (...args: unknown[]) => unknown>(
-    fn: T,
-    delay: number
-  ): ((...args: Parameters<T>) => void) => {
+  debounce: <T extends (...args: unknown[]) => unknown>(fn: T, delay: number): ((...args: Parameters<T>) => void) => {
     let timeoutId: ReturnType<typeof setTimeout>;
     return (...args: Parameters<T>) => {
       clearTimeout(timeoutId);
@@ -161,10 +158,7 @@ contextBridge.exposeInMainWorld('tokenringUtil', {
   },
 
   // Throttle function
-  throttle: <T extends (...args: unknown[]) => unknown>(
-    fn: T,
-    limit: number
-  ): ((...args: Parameters<T>) => void) => {
+  throttle: <T extends (...args: unknown[]) => unknown>(fn: T, limit: number): ((...args: Parameters<T>) => void) => {
     let inThrottle = false;
     return (...args: Parameters<T>) => {
       if (!inThrottle) {
@@ -183,5 +177,5 @@ contextBridge.exposeInMainWorld('tokenringUtil', {
   // Generate unique ID
   generateId: (): string => {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-  }
+  },
 });
