@@ -6,4 +6,4 @@ import "./fsBridge";
 import "./apiBridge";
 
 // Export a version object for debugging
-console.log("[Preload] TokenRing Coder preload script loaded");
+console.log("[Preload] TokenRing preload script loaded");

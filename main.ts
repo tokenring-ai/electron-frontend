@@ -14,7 +14,7 @@ const CONFIG = {
     height: 900,
     minWidth: 1000,
     minHeight: 600,
-    title: "TokenRing Coder",
+    title: "TokenRing",
   },
   backend: {
     port: 3456,
@@ -355,7 +355,7 @@ class TokenRingCoderApp {
         label: "Help",
         submenu: [
           {
-            label: "About TokenRing Coder",
+            label: "About TokenRing",
             click: () => {
               this.mainWindow?.webContents.send("menu:about");
             },
@@ -408,7 +408,7 @@ class TokenRingCoderApp {
     icon.resize({ width: 16, height: 16 });
 
     this.tray = new Tray(icon);
-    this.tray.setToolTip("TokenRing Coder");
+    this.tray.setToolTip("TokenRing");
 
     const contextMenu = Menu.buildFromTemplate([
       { label: "Show", click: () => this.mainWindow?.show() },

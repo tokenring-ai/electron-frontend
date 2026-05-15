@@ -19,7 +19,7 @@ export default {
   name: packageJSON.name,
   displayName: "Electron Integration",
   version: packageJSON.version,
-  description: "TokenRing Coder Electron Integration",
+  description: "TokenRing Electron Integration",
   install(app, config) {
     // Only configure web host if Electron integration is enabled
     const electronConfig = config.electron ?? { enabled: true, port: 3456, host: "127.0.0.1" };
