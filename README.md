@@ -1,6 +1,6 @@
-# TokenRing Coder Electron App
+# TokenRing One Electron App
 
-This directory contains the Electron application for TokenRing Coder.
+This directory contains the Electron application for TokenRing One.
 
 ## Directory Structure
 
@@ -35,7 +35,7 @@ The main process handles:
 - Application lifecycle (startup, shutdown)
 - Window management (create, resize, close)
 - IPC handlers (filesystem, dialogs, app info)
-- Backend process management (spawns the TokenRing Coder CLI)
+- Backend process management (spawns the TokenRing One CLI)
 
 ### Renderer Process
 
@@ -60,7 +60,7 @@ Preload scripts expose secure APIs to the renderer:
 1. Install dependencies:
 
    ```bash
-   cd app/coder
+   cd app/one
    bun install
    ```
 
@@ -75,7 +75,7 @@ Preload scripts expose secure APIs to the renderer:
 Run both frontend and backend in development mode:
 
 ```bash
-cd app/coder
+cd app/one
 npm run electron:dev
 ```
 
@@ -90,7 +90,7 @@ This will:
 Build the Electron app for the current platform:
 
 ```bash
-cd app/coder
+cd app/one
 npm run electron:build
 ```
 
@@ -163,7 +163,7 @@ npm run electron:rebuild
 
 Check the console output for errors:
 
-1. Verify `dist/tr-coder.js` exists
+1. Verify `dist/tokenring.js` exists
 2. Check Node.js is in PATH
 3. Verify all dependencies are installed
 

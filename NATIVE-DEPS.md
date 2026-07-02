@@ -15,7 +15,7 @@ Some packages in the TokenRing ecosystem require native Node.js bindings that mu
 ### Automatic Rebuild
 
 ```bash
-cd app/coder
+cd app/one
 npm run electron:rebuild
 ```
 
@@ -26,7 +26,7 @@ This uses `electron-rebuild` to rebuild all native modules for the current Elect
 If you need more control:
 
 ```bash
-cd app/coder
+cd app/one
 npx electron-rebuild -f -w better-sqlite3
 ```
 
@@ -124,7 +124,7 @@ To speed up rebuilds:
 In CI environments, rebuild all native modules:
 
 ```bash
-cd app/coder
+cd app/one
 npm run electron:rebuild
 ```
 

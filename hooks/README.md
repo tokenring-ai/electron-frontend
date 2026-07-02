@@ -7,7 +7,7 @@ This directory contains hooks for the Electron build process.
 This script runs before the Electron build starts. It:
 1. Installs dependencies
 2. Builds the frontend (React chat UI)
-3. Builds the backend (TokenRing Coder CLI)
+3. Builds the backend (TokenRing One CLI)
 
 ## afterBuild.sh
 
