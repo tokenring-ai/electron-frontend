@@ -79,15 +79,15 @@ contextBridge.exposeInMainWorld("tokenringFS", {
 
   // Convenience methods
   readTextFile: async (path: string): Promise<string | null> => {
-    const result = await ipcRenderer.invoke("fs:readFile", path);
+    const result = (await ipcRenderer.invoke("fs:readFile", path)) as { success: boolean; content?: string | undefined };
     if (result.success) {
-      return result.content;
+      return result.content ?? null;
     }
     return null;
   },
 
   writeTextFile: async (path: string, content: string): Promise<boolean> => {
-    const result = await ipcRenderer.invoke("fs:writeFile", path, content);
+    const result = (await ipcRenderer.invoke("fs:writeFile", path, content)) as { success: boolean };
     return result.success;
   },
 
