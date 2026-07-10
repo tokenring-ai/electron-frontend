@@ -26,7 +26,7 @@ const CONFIG = {
   },
 };
 
-class TokenRingCoderApp {
+class TokenRingOneApp {
   private mainWindow: BrowserWindow | null = null;
   private backendProcess: ChildProcess | null = null;
   private tray: Tray | null = null;
@@ -464,5 +464,5 @@ class TokenRingCoderApp {
 }
 
 // Start the app
-const tokenRingApp = new TokenRingCoderApp();
+const tokenRingApp = new TokenRingOneApp();
 tokenRingApp.start();

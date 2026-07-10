@@ -1,11 +1,11 @@
 {
-  "appId": "ai.tokenring.coder",
-  "productName": "TokenRing Coder",
+  "appId": "ai.tokenring.one",
+  "productName": "TokenRing One",
   "organization": "TokenRing AI",
   "directories": {
     "output": "dist-electron",
     "buildResources": "electron/resources",
-    "app": "dist-electron/TokenRing Coder"
+    "app": "dist-electron/TokenRing One"
   },
   "files": [
     "dist/**/*"
@@ -33,14 +33,14 @@
     "target": ["dmg", "zip"]
   },
   "dmg": {
-    "title": "TokenRing Coder",
+    "title": "TokenRing One",
     "background": "electron/resources/background.png",
     "contents": [
       {
         "x": 130,
         "y": 220,
         "type": "file",
-        "path": "TokenRing Coder.app"
+        "path": "TokenRing One.app"
       },
       {
         "x": 410,
@@ -67,7 +67,7 @@
     "oneClick": false,
     "allowToChangeInstallationDirectory": true,
     "createDesktopShortcut": true,
-    "shortcutName": "TokenRing Coder",
+    "shortcutName": "TokenRing One",
     "license": "electron/resources/LICENSE"
   },
   "linux": {
@@ -75,7 +75,7 @@
     "category": "Development;IDE",
     "target": ["AppImage", "deb", "rpm", "snap"],
     "desktop": {
-      "Name": "TokenRing Coder",
+      "Name": "TokenRing One",
       "Type": "Application",
       "Comment": "AI-powered coding assistant",
       "Categories": "Development;IDE",
@@ -83,7 +83,7 @@
     }
   },
   "pkg": {
-    "id": "ai.tokenring.coder",
+    "id": "ai.tokenring.one",
     "background": "electron/resources/background.png",
     "backgroundColor": "#1e1e1e",
     "installLocation": "/Applications"

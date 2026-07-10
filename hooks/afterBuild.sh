@@ -9,7 +9,7 @@ echo "[afterBuild] Verifying build artifacts..."
 
 # Get the version from package.json
 VERSION=$(node -e "console.log(require('../package.json').version)")
-echo "[afterBuild] Built TokenRing Coder version $VERSION"
+echo "[afterBuild] Built TokenRing One version $VERSION"
 
 # List the output files
 echo "[afterBuild] Build output:"
